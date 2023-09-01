@@ -15,19 +15,11 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
-import LoginScreen from './src/screens/LoginScreen';
-
-
-
-
+import StartLiveScreen from './src/screens/StartLiveScreen';
+import Navigation from './src/navigations/Navigation';
 
 function App(): JSX.Element {
-  
-
-  return (
-    <LoginScreen/>
-  );
+  return <Navigation />;
 }
 
 const styles = StyleSheet.create({
