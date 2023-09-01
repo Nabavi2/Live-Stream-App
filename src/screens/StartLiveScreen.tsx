@@ -6,22 +6,11 @@ import {
   TextInput,
   StyleSheet,
   View,
-  Image,
-  ActivityIndicator,
   TouchableOpacity,
-  ScrollView,
-  Dimensions,
   Text,
   SafeAreaView,
 } from 'react-native';
-import {
-  PERMISSIONS,
-  check,
-  request,
-  openLimitedPhotoLibraryPicker,
-  openSettings,
-} from 'react-native-permissions';
-// import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import {PERMISSIONS, request} from 'react-native-permissions';
 import Colors from '../constants/Colors';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -30,7 +19,6 @@ function StartLiveScreen() {
   const navigation = useNavigation();
 
   const checkCameraAndMicPermission = async () => {
-    // const cameraPermission = await check(PERMISSIONS.ANDROID.CAMERA);
     const cameraPermission = await request(PERMISSIONS.ANDROID.CAMERA);
     const micPermission = await request(PERMISSIONS.ANDROID.RECORD_AUDIO);
     if (cameraPermission && micPermission == 'granted') {
