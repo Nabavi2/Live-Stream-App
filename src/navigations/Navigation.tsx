@@ -4,6 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import StartLiveScreen from '../screens/StartLiveScreen';
 import CameraRenderScreen from '../screens/CameraRenderScreen';
 import LiveScreen from '../screens/LiveScreen';
+import VideoPlayerScreen from '../screens/VideoPlayerScreen';
+import ViewerLiveScreen from '../screens/ViewerLiveScreen';
 
 export default function Navigation() {
   return (
@@ -24,6 +26,8 @@ const StackNavigator = () => {
       <Stack1.Screen name="LiveStream" component={StartLiveScreen} />
       <Stack1.Screen name="CameraScreen" component={CameraRenderScreen} />
       <Stack1.Screen name="LiveScreen" component={LiveScreen} />
+      <Stack1.Screen name="VideoScreen" component={VideoPlayerScreen} />
+      <Stack1.Screen name="ViewerScreen" component={ViewerLiveScreen} />
     </Stack1.Navigator>
   );
 };

@@ -90,7 +90,7 @@ export default function CameraRenderScreen() {
         ref={camera}
         nativeID={devices.back?.id}
         style={StyleSheet.absoluteFill}
-        device={rotate == devices.front ? devices?.front : devices.back}
+        device={rotate == devices?.back ? devices?.back : devices?.front}
         isActive={true}
         photo={true}
         audio={true}
@@ -99,6 +99,16 @@ export default function CameraRenderScreen() {
         focusable={true}
         torch={flash == 'on' ? 'on' : 'off'}
       />
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          marginTop: 10,
+          marginLeft: 10,
+        }}>
+        <MaterialIcon name="close" color="#fff" size={28} />
+      </TouchableOpacity>
       <View style={{left: '88%', marginTop: '30%'}}>
         {/* <TouchableOpacity
           onPress={onHandleTakePhotos}
@@ -121,12 +131,14 @@ export default function CameraRenderScreen() {
           }}>
           <Text>Stop Recording</Text>
         </TouchableOpacity> */}
+
         <TouchableOpacity
           onPress={onRotateCamera}
           style={{
             position: 'absolute',
             zIndex: 1,
-            marginTop: 80,
+            marginTop: Dimensions.get('screen').height * 0.12,
+            marginBottom: 40,
           }}>
           <MaterialIcon name="cameraswitch" color="#fff" size={28} />
         </TouchableOpacity>
@@ -135,7 +147,8 @@ export default function CameraRenderScreen() {
           style={{
             position: 'absolute',
             zIndex: 1,
-            marginTop: 120,
+            marginBottom: 0,
+            marginTop: 50,
           }}>
           {/* */}
           {micStatus ? (
@@ -149,7 +162,6 @@ export default function CameraRenderScreen() {
           style={{
             position: 'absolute',
             zIndex: 1,
-            marginTop: 160,
           }}>
           {flashStatus ? (
             <MaterialIcon name="flash-on" color="#fff" size={28} />

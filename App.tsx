@@ -14,8 +14,8 @@ import {
   Text,
   useColorScheme,
   View,
+  I18nManager,
 } from 'react-native';
-import StartLiveScreen from './src/screens/StartLiveScreen';
 import Navigation from './src/navigations/Navigation';
 
 function App(): JSX.Element {

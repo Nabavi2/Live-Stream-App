@@ -43,6 +43,22 @@ function StartLiveScreen() {
           </Text>
           <MaterialIcon name="live-tv" size={20} color={Colors.white} />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.startLiveBtn}
+          onPress={() => navigation.navigate('VideoScreen' as never)}>
+          <Text style={{color: '#fff', fontWeight: '700', marginRight: 10}}>
+            Go Video
+          </Text>
+          <MaterialIcon name="live-tv" size={20} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.startLiveBtn, {marginTop: 20}]}
+          onPress={() => navigation.navigate('ViewerScreen' as never)}>
+          <Text style={{color: '#fff', fontWeight: '700', marginRight: 10}}>
+            Go Viewer Screen
+          </Text>
+          <MaterialIcon name="live-tv" size={20} color={Colors.white} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
