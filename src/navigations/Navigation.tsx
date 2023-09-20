@@ -6,6 +6,8 @@ import CameraRenderScreen from '../screens/CameraRenderScreen';
 import LiveScreen from '../screens/LiveScreen';
 import VideoPlayerScreen from '../screens/VideoPlayerScreen';
 import ViewerLiveScreen from '../screens/ViewerLiveScreen';
+// import LiveScreen2 from '../screens/LiveScreen2';
+import JoinToLiveScreen from '../screens/JoinToLiveScreen';
 
 export default function Navigation() {
   return (
@@ -14,7 +16,6 @@ export default function Navigation() {
     </NavigationContainer>
   );
 }
-// This methode is for Top Tab Navigator
 
 //Stack Navigator for navigate to other page
 const Stack1 = createStackNavigator();
@@ -28,6 +29,8 @@ const StackNavigator = () => {
       <Stack1.Screen name="LiveScreen" component={LiveScreen} />
       <Stack1.Screen name="VideoScreen" component={VideoPlayerScreen} />
       <Stack1.Screen name="ViewerScreen" component={ViewerLiveScreen} />
+      {/* <Stack1.Screen name="LiveScreen2" component={LiveScreen2} /> */}
+      <Stack1.Screen name="JoinToLive" component={JoinToLiveScreen} />
     </Stack1.Navigator>
   );
 };

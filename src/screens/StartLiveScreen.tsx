@@ -1,48 +1,39 @@
-import React, {useState} from 'react';
-import * as Yup from 'yup';
-import {Formik} from 'formik';
+import React from 'react';
 import {
-  Alert,
-  TextInput,
   StyleSheet,
   View,
   TouchableOpacity,
   Text,
   SafeAreaView,
 } from 'react-native';
-import {PERMISSIONS, request} from 'react-native-permissions';
-import Colors from '../constants/Colors';
+import {request, PERMISSIONS} from 'react-native-permissions';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Colors from '../constants/Colors';
 
 function StartLiveScreen() {
   const navigation = useNavigation();
 
-  const checkCameraAndMicPermission = async () => {
+  const onGoLiveHandler = async () => {
     const cameraPermission = await request(PERMISSIONS.ANDROID.CAMERA);
     const micPermission = await request(PERMISSIONS.ANDROID.RECORD_AUDIO);
     if (cameraPermission && micPermission == 'granted') {
       console.log('The user Allowed camera');
-      navigation.navigate('CameraScreen' as never);
+      navigation.navigate('LiveScreen' as never, {
+        isLiveStart: true,
+        isJoined: false,
+      });
       return true;
     }
   };
 
   return (
-    <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
+    <SafeAreaView style={{backgroundColor: '#fff', flex: 1}} testID="startlive">
       <View style={styles.screen}>
         <Text style={{fontSize: 18, fontWeight: '700', marginTop: 20}}>
           Tap on button to go live screen
         </Text>
 
-        <TouchableOpacity
-          style={styles.startLiveBtn}
-          onPress={() => checkCameraAndMicPermission()}>
-          <Text style={{color: '#fff', fontWeight: '700', marginRight: 10}}>
-            Start Live
-          </Text>
-          <MaterialIcon name="live-tv" size={20} color={Colors.white} />
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.startLiveBtn}
           onPress={() => navigation.navigate('VideoScreen' as never)}>
@@ -58,6 +49,21 @@ function StartLiveScreen() {
             Go Viewer Screen
           </Text>
           <MaterialIcon name="live-tv" size={20} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.startLiveBtn, {marginTop: 20}]}
+          onPress={() => onGoLiveHandler()}>
+          <Text style={{color: '#fff', fontWeight: '700', marginRight: 10}}>
+            Go Live screen
+          </Text>
+          <MaterialIcon name="live-tv" size={20} color={Colors.white} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.startLiveBtn, {marginTop: 20}]}
+          onPress={() => navigation.navigate('JoinToLive' as never)}>
+          <Text style={{color: '#fff', fontWeight: '700', marginRight: 10}}>
+            Go Join Screen
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.primary,
-    marginTop: '50%',
+    marginTop: 30,
   },
 });
 export default StartLiveScreen;

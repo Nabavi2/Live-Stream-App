@@ -39,31 +39,7 @@ export default function CameraRenderScreen() {
       </SafeAreaView>
     );
   }
-  const onHandleTakePhotos = async () => {
-    await camera.current?.takePhoto({
-      qualityPrioritization: 'quality',
-      flash: 'on',
-      enableAutoRedEyeReduction: true,
-    });
-    await camera.current?.takeSnapshot({
-      flash: 'on',
-      quality: 100,
-      skipMetadata: true,
-    });
-  };
-  const onHandleRecordVideo = async () => {
-    await camera.current?.startRecording({
-      fileType: 'mp4',
-      flash: 'on',
-      videoCodec: 'h264',
-      onRecordingFinished: finish => console.log(finish, 'Finished record'),
-      onRecordingError: error => console.log(error, 'Error'),
-    });
-  };
 
-  const onHandleStopRecordVideo = async () => {
-    await camera.current?.stopRecording();
-  };
   const onRotateCamera = () => {
     if (rotate == devices?.back) {
       setRotate(devices?.front);
@@ -110,28 +86,6 @@ export default function CameraRenderScreen() {
         <MaterialIcon name="close" color="#fff" size={28} />
       </TouchableOpacity>
       <View style={{left: '88%', marginTop: '30%'}}>
-        {/* <TouchableOpacity
-          onPress={onHandleTakePhotos}
-          style={{
-            position: 'absolute',
-            zIndex: 1,
-            marginTop: 20,
-            backgroundColor: 'red',
-          }}>
-          <Text>Start Recording</Text>
-          <MaterialIcon name="video" color="#fff" size={20} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={onHandleStopRecordVideo}
-          style={{
-            position: 'absolute',
-            zIndex: 1,
-            marginTop: 50,
-            backgroundColor: 'red',
-          }}>
-          <Text>Stop Recording</Text>
-        </TouchableOpacity> */}
-
         <TouchableOpacity
           onPress={onRotateCamera}
           style={{

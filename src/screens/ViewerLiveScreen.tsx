@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../constants/Colors';
 import Eye from '../Icons/Eye';
 
@@ -67,7 +66,6 @@ function ViewerLiveScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-
     backgroundColor: '#fff',
   },
 
@@ -78,11 +76,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  secondContainer: {
-    backgroundColor: '#B30418',
-    width: '100%',
-    height: '49%',
-  },
+
   liveContainer: {
     backgroundColor: Colors.red,
     height: 30,

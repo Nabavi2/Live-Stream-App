@@ -22,8 +22,17 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
-const VideoPlayer = (props: any) => {
+interface Props {
+  props: {
+    video: string;
+    poster: string;
+    isQualityChange: boolean;
+    pictureInPicture: boolean;
+    time: string;
+  };
+}
+const VideoPlayer = ({props}: Props) => {
+  const {video, poster, isQualityChange, pictureInPicture, time} = props;
   const videoRef = React.createRef();
   const [videoT, setVideoT] = useState<string | null>();
   const [state, setState] = useState({
@@ -35,28 +44,26 @@ const VideoPlayer = (props: any) => {
     isBuffer: false,
     seekToPrevious: 0,
   });
-
   const setVideoTime = async () => {
-    await AsyncStorage.setItem('videotime', props.time);
+    await AsyncStorage.setItem('videotime', time);
   };
   const getVideoTime = async () => {
-    const time = await AsyncStorage.getItem('videotime');
-    setVideoT(time);
-    return time;
+    const time1 = await AsyncStorage.getItem('videotime');
+    setVideoT(time1);
+    return time1;
   };
 
   useEffect(() => {
-    // console.log('props.item .ivde333', props.item.video);
     onLoadEnd;
 
-    if (props.item.isQualityChange && videoT === props.time) {
+    if (isQualityChange && videoT === time) {
       setState(s => ({...s, seekToPrevious: state.currentTime}));
     } else {
       setState(s => ({...s, seekToPrevious: 0}));
     }
     setVideoTime();
     getVideoTime();
-  }, [props.time, props.item.isQualityChange]);
+  }, [time, isQualityChange]);
 
   useEffect(() => {
     Orientation.addOrientationListener(handleOrientation);
@@ -116,10 +123,7 @@ const VideoPlayer = (props: any) => {
     setState(s => ({
       ...s,
       duration: data.duration,
-      currentTime:
-        props.item.isQualityChange && videoT === props.time
-          ? data.currentTime
-          : 0,
+      currentTime: isQualityChange && videoT === time ? data.currentTime : 0,
     }));
   }
 
@@ -140,19 +144,20 @@ const VideoPlayer = (props: any) => {
       ? setState({...state, showControls: false})
       : setState({...state, showControls: true});
   }
-
   return (
-    <View style={state.fullscreen ? styles.container1 : styles.container}>
+    <View
+      style={state.fullscreen ? styles.container1 : styles.container}
+      testID="video-player">
       <TouchableWithoutFeedback onPress={showControls}>
         <View>
-          {props.item.video ? (
+          {video ? (
             <Video
-              pictureInPicture={props.pictureInPicture}
+              pictureInPicture={pictureInPicture}
               playInBackground={false}
               ref={videoRef}
-              poster={props.item.poster}
+              poster={poster}
               source={{
-                uri: props.item.video ? props.item.video.trim() : '',
+                uri: video ? video.trim() : '',
               }}
               style={state.fullscreen ? styles.fullscreenVideo : styles.video}
               controls={false}
@@ -185,11 +190,11 @@ const VideoPlayer = (props: any) => {
                   {state.fullscreen ? (
                     <MaterialIcons
                       name="fullscreen-exit"
-                      size={24}
-                      color="black"
+                      size={34}
+                      color="white"
                     />
                   ) : (
-                    <MaterialIcons name="fullscreen" size={24} color="black" />
+                    <MaterialIcons name="fullscreen" size={34} color="white" />
                   )}
                 </TouchableOpacity>
               </View>
@@ -232,7 +237,7 @@ const styles = StyleSheet.create({
     height: wp('100%'),
   },
   video: {
-    height: 200,
+    height: Dimensions.get('screen').height * 0.35,
     width: Dimensions.get('window').width,
     backgroundColor: 'black',
   },

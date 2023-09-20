@@ -5,18 +5,8 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import {
-  VideoSkipBack,
-  VideoPrevious,
-  VideoPause,
-  VideoPlay,
-  VideoNext,
-  VideoSkipForward,
-} from '../assets/icons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Colors from '../constants/Colors';
 // interface Props{

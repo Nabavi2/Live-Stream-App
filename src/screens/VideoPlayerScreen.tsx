@@ -21,11 +21,12 @@ export default function VideoPlayerScreen() {
       'https://mir-s3-cdn-cf.behance.net/project_modules/1400/e5865358516595.59ffa0a2671f5.jpg',
 
     isQualityChange: false,
+    pictureInPicture: true,
     time: '00:27',
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <VideoPlayer item={data} pictureInPicture={true} time="00:27" />
+    <SafeAreaView style={{flex: 1}} testID="play-screen">
+      <VideoPlayer props={{...data}} />
     </SafeAreaView>
   );
 }
